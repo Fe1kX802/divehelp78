@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск личный вещей | DIVE HELP 78</title>
+    <title>Название услуги | DIVE HELP 78</title>
     <!-- Подключаем современный шрифт -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap" rel="stylesheet">
     <!-- Подключаем иконки -->
@@ -17,46 +17,12 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        html {
-            height: -webkit-fill-available; /* Фикс высоты для мобильного Safari */
-        }
-
         body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            min-height: 100dvh; /* Динамическая высота с учетом скрывающихся панелей браузера */
-            
-            /* Автоматические отступы: защищают заголовок сверху и меню снизу от наездов системных панелей */
-            padding-top: calc(max(15px, env(safe-area-inset-top)) + 15px) !important;
-            padding-bottom: calc(max(15px, env(safe-area-inset-bottom)) + 20px) !important;
-            
-            position: relative;
-            box-sizing: border-box;
-            overflow-x: hidden; /* Защита от случайного горизонтального скролла */
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            
-            /* Благородное затемнение фона для идеальной читаемости текста вне карточек */
-            background: rgba(15, 23, 42, 0.3); 
-            
-            /* Размываем фоновую картинку под оверлеем */
-            backdrop-filter: blur(8px); 
-            -webkit-backdrop-filter: blur(8px); /* Поддержка iOS Safari */
-            
-            z-index: -1; /* Слой ложится строго под контент, но над фоном body */
-            pointer-events: none; /* Клик сквозь слой к элементам интерфейса */
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
+            /* Фоновое изображение воды со светлой подложкой */
+            background: #f0f6fc url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #1e293b; /* Глубокий сланцевый цвет для максимальной читаемости */
+            line-height: 1.6;
         }
 
         /* Светлый градиентный оверлей для эффекта солнечной воды */
@@ -631,7 +597,7 @@
                         <div class="logo-dropdown-items-container" id="logoDropdownItemsContainer"></div>
                     </div>
                 </div>
-                <span><a href="index.html" style="color: inherit; text-decoration: none;">DIVE HELP 78</a></span>
+                <span>DIVE HELP 78</span>
             </div>
             <div class="header-contacts">
                 <a href="tel:+79112633001"><i class="fa-solid fa-phone"></i> +7 (911) 263-30-01</a>
@@ -644,54 +610,40 @@
             
             <div class="hero-banner-overlay">
                 <div class="hero-banner-content">
-                    <!-- Хлебные крошки / Возврат назад -->
                     <a href="index.html" class="back-breadcrumbs">
                         <i class="fa-solid fa-arrow-left-long"></i> На главную
                     </a>
-                    <!-- Заголовок страницы -->
-                    <h1 class="hero-banner-title">Подводная сварка и установка понтонов</h1>
-                    <!-- Короткое описание на баннере -->
-                    <p class="hero-banner-desc">Подводная сварка металлоконструкций, монтаж, ремонт и установка понтонов. Профессиональное оборудование, опытные водолазы и качественное выполнение работ.</p>
+                    <h1 class="hero-banner-title">Название услуги</h1>
+                    <p class="hero-banner-desc">Краткое описание/подзаголовок</p>
                 </div>
             </div>
         </section>
 
         <main class="content-section glass">
+            <h2>Первый заголовок второго уровня (H2)</h2>
+            <p>Обычный абзац текста</p>
+            <p>Дополнительный абзац текста</p>
+            <p><strong>Текст жирным шрифтом (выделение)</strong></p>
 
-            <h2>Требуются подводная сварка или установка понтонов?</h2>
-
-            <p>Мы выполняем сварочные и монтажные работы под водой с использованием специализированного оборудования и соблюдением всех требований безопасности.</p>
-
-            <p>Подводная сварка позволяет выполнять ремонт и монтаж конструкций без необходимости их демонтажа и подъема на поверхность.</p>
-
-            <h3>Какие работы мы выполняем?</h3>
-
-            <ul>
-                <li>Подводную сварку металлических конструкций.</li>
-                <li>Монтаж и демонтаж оборудования.</li>
-                <li>Установку и ремонт понтонов.</li>
-                <li>Восстановление поврежденных металлических элементов.</li>
-            </ul>
-
+            <h3>Подзаголовок третьего уровня (H3)</h3>
+            <p>Вторичный текст/подраздел</p>
+            
             <div class="content-accent-box">
-                <p><a style="text-decoration: underline; font-weight: bold;">Все работы</a> выполняются квалифицированными водолазами с применением профессионального оборудования.</p>
+                <p>Важный акцентный блок</p>
             </div>
 
-            <h2>Как проходят работы?</h2>
-
-            <p>После обращения процесс организуется следующим образом:</p>
-
+            <h2>Заголовок списка</h2>
+            <p>Краткое описание/подзаголовок списка</p>
+            
             <ul>
-                <li>Проводится осмотр объекта и оценка объема работ.</li>
-                <li>Подготавливается необходимое оборудование.</li>
-                <li>Водолаз выполняет сварочные или монтажные работы.</li>
-                <li>После завершения проводится проверка качества выполненных работ.</li>
+                <li>Первый пункт списка</li>
+                <li>Второй пункт пункт</li>
+                <li>Третий пункт списка</li>
+                <li>Четвертый пункт списка</li>
             </ul>
 
-            <h3>Необходимы подводные монтажные работы? <a style="font-weight: bold;">Обращайтесь.</a></h3>
-
-            <p>Мы выполним работы качественно, безопасно и в согласованные сроки.</p>
-
+            <h3>Итоговое заключение</h3>
+            <p>Финальный абзац текста</p>
         </main>
 
         <footer class="glass" id="contacts">
@@ -739,10 +691,6 @@
                 +7 (911) 263-30-01
             </a>
             <p style="margin-top: 15px; font-size: 0.9rem; color: #475569;">Работаем по Санкт-Петербургу и всей Ленинградской области</p>
-            <div style="margin-top: 20px; font-size: 0.8rem;">
-                <a href="privacy.html" style="color: rgb(141, 141, 141); text-decoration: underline; margin-right: 15px;">Политика конфиденциальности</a>
-                <a href="offer.html" style="color: rgb(141, 141, 141); text-decoration: underline;">Публичная оферта</a>
-            </div>
         </footer>
     </div>
 
@@ -751,12 +699,7 @@
             
             const sitePages = [
                 { name: 'Главная страница', url: 'index.html', icon: 'fa-house' },
-                { name: 'Поиск личных вещей', url: 'personal-search.html', icon: 'fa-mobile-screen-button' },
-                { name: 'Помощь катерам и яхтам', url: 'boat-help.html', icon: 'fa-anchor' },
-                { name: 'Работа с приборами', url: 'instrument-work.html', icon: 'fa-magnifying-glass-location' },
-                { name: 'Очистка акваторий', url: 'water-cleaning.html', icon: 'fa-leaf' },
-                { name: 'Ремонт и обслуживание бассейнов', url: 'pool-cleaning.html', icon: 'fa-screwdriver-wrench'},
-                { name: 'Сварочные работы и установка понтонов', url: 'pool-cleaning.html', icon: 'fa-bolt'}
+                { name: 'Плейсхолдер', url: 'development-in-process.html', icon: 'fa-gear' }
             ];
 
             const trigger = document.getElementById('logoDropdownTrigger');

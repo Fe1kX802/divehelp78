@@ -17,12 +17,46 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        html {
+            height: -webkit-fill-available; /* Фикс высоты для мобильного Safari */
+        }
+
         body {
-            /* Фоновое изображение воды с мягкой светлой подложкой */
-            background: #f0f6fc url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
-            color: #1e293b; /* Глубокий сланцевый цвет для максимальной читаемости */
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            min-height: 100dvh; /* Динамическая высота с учетом скрывающихся панелей браузера */
+            
+            /* Автоматические отступы: защищают заголовок сверху и меню снизу от наездов системных панелей */
+            padding-top: calc(max(15px, env(safe-area-inset-top)) + 15px) !important;
+            padding-bottom: calc(max(15px, env(safe-area-inset-bottom)) + 20px) !important;
+            
+            position: relative;
+            box-sizing: border-box;
+            overflow-x: hidden; /* Защита от случайного горизонтального скролла */
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            
+            /* Благородное затемнение фона для идеальной читаемости текста вне карточек */
+            background: rgba(15, 23, 42, 0.3); 
+            
+            /* Размываем фоновую картинку под оверлеем */
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); /* Поддержка iOS Safari */
+            
+            z-index: -1; /* Слой ложится строго под контент, но над фоном body */
+            pointer-events: none; /* Клик сквозь слой к элементам интерфейса */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         /* Светлый градиентный оверлей для эффекта солнечной воды */
