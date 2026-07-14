@@ -20,26 +20,20 @@
         }
 
         body {
-            /* Фоновое изображение воды */
             background: #f0f6fc url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             color: #1e293b;
             line-height: 1.6;
-            
-            /* Настройки для центрирования контента */
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* Мобильный фикс высоты и отступов */
             min-height: 100vh;
             min-height: 100dvh;
             padding: calc(max(20px, env(safe-area-inset-top)) + 20px) 20px calc(max(20px, env(safe-area-inset-bottom)) + 20px) !important;
             position: relative;
-            overflow: hidden; /* Скрываем вылезающие за край экрана пузырьки */
+            overflow: hidden;
         }
 
-        /* Глобальный размытый оверлей для идеальной читаемости (тот самый фикс) */
         body::before {
             content: "";
             position: fixed;
@@ -153,7 +147,6 @@
             animation: rise 10s infinite ease-in;
         }
 
-        /* Настройка отдельных пузырьков */
         .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 8s; animation-delay: 0s; }
         .bubble:nth-child(2) { width: 20px; height: 20px; left: 25%; animation-duration: 5s; animation-delay: 2s; }
         .bubble:nth-child(3) { width: 50px; height: 50px; left: 45%; animation-duration: 12s; animation-delay: 1s; }
@@ -214,7 +207,6 @@
 </head>
 <body>
 
-    <!-- Фоновые анимированные пузырьки -->
     <div class="bubbles">
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -224,7 +216,6 @@
         <div class="bubble"></div>
     </div>
 
-    <!-- Основная карточка заглушки -->
     <div class="construction-card">
         <div class="icon-container">
             <i class="fa-solid fa-gear gear-icon"></i>
