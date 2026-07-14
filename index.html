@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Водолазные услуги. СПб и ЛО</title>
+    <!-- Подключаем современный шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Подключаем иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            /* Фоновое изображение воды с мягкой светлой подложкой */
+            background: #f0f6fc url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #1e293b; /* Глубокий сланцевый цвет для максимальной читаемости */
+            line-height: 1.6;
+        }
+
+        /* Светлый градиентный оверлей для эффекта солнечной воды */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(240, 248, 255, 0.88) 0%, rgba(224, 242, 254, 0.92) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.65); /* Белое полупрозрачное стекло */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Светлая деликатная рамка */
+            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.05); /* Очень мягкая голубоватая тень */
+            border-radius: 24px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 100px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            user-select: none;
+            color: #0f172a; /* Темный заголовок логотипа */
+        }
+
+        .logo-dropdown-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* Интерактивный триггер выпадающего списка */
+        .logo-dropdown-trigger {
+            background: rgba(0, 119, 255, 0.08);
+            border: 1px solid rgba(0, 119, 255, 0.2);
+            color: #0077ff; /* Контрастный синий */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+        }
+
+        .logo-dropdown-trigger:hover {
+            background: rgba(0, 119, 255, 0.15);
+            border-color: rgba(0, 119, 255, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.15);
+        }
+
+        .logo-dropdown-trigger:active {
+            transform: translateY(1px);
+        }
+
+        .logo-dropdown-trigger i.fa-water {
+            font-size: 1.1rem;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-dropdown-container.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .logo-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            min-width: 280px;
+            z-index: 1001;
+            padding: 8px;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.95); /* Белоснежное плотное стекло */
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(0, 119, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 119, 255, 0.1);
+        }
+
+        .logo-dropdown-menu.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .logo-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #334155; /* Читаемый темно-серый цвет */
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .logo-dropdown-item:hover {
+            background: rgba(0, 119, 255, 0.08);
+            color: #0077ff;
+            padding-left: 20px;
+        }
+
+        .logo-dropdown-item.active {
+            color: #0077ff;
+            background: rgba(0, 119, 255, 0.05);
+        }
+
+        .logo-dropdown-item i {
+            font-size: 0.85rem;
+            width: 16px;
+            text-align: center;
+            color: #0077ff;
+            opacity: 0.9;
+        }
+
+        .mobile-close-btn {
+            display: none;
+        }
+
+        .header-contacts a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .header-contacts a:hover { color: #0077ff; }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            margin: 40px 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #0f172a; /* Темный заголовок */
+            text-shadow: none; /* Убираем тяжелые тени темной темы */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #475569; /* Смягченный цвет основного текста */
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0077ff 0%, #00d4ff 100%);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 119, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 119, 255, 0.35);
+        }
+
+        .btn-outline {
+            background: rgba(0, 119, 255, 0.05);
+            border: 1px solid rgba(0, 119, 255, 0.2);
+            color: #0077ff;
+            margin-left: 15px;
+        }
+        .btn-outline:hover { 
+            background: rgba(0, 119, 255, 0.1);
+            border-color: rgba(0, 119, 255, 0.4);
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 60px 0 30px;
+            color: #0f172a;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: #1e293b;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        background 0.4s ease, 
+                        box-shadow 0.4s ease,
+                        border-color 0.4s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 119, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 119, 255, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #0077ff;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+            color: #1e293b;
+        }
+
+        footer h2 {
+            color: #0f172a;
+        }
+
+        .social-links {
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            max-width: 700px;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .social-btn.phone {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .social-btn.tg {
+            background: rgba(0, 136, 204, 0.9);
+        }
+        .social-btn.wa {
+            background: rgba(37, 211, 102, 0.9);
+        }
+        .social-btn.max {
+            background: linear-gradient(135deg, #7F00FF 0%, #00DFD4 100%);
+        }
+
+        .social-btn:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 119, 255, 0.25);
+        }
+
+        .social-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .social-item:hover .social-label {
+            color: #0077ff;
+        }
+
+        @media (max-width: 768px) {
+            /* Минимизируем отступы вокруг контента до предела */
+            .container { 
+                padding: 0 6px !important; 
+            }
+            
+            body {
+                background-attachment: scroll; /* Оптимизация прокрутки */
+            }
+
+            /* Менее прозрачные, плотные белые карточки на мобильных для читаемости */
+            .glass {
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.9) !important;
+                box-shadow: 0 4px 15px rgba(0, 119, 255, 0.03) !important;
+            }
+
+            /* Шапка: компактный ряд вместо переноса блоков */
+            header { 
+                flex-direction: row !important; 
+                justify-content: space-between !important;
+                align-items: center !important;
+                margin-top: 8px !important;
+                padding: 10px 14px !important;
+                border-radius: 16px !important;
+                gap: 8px !important;
+            }
+            
+            .logo { 
+                width: auto !important;
+                justify-content: flex-start !important;
+                font-size: 0.95rem !important;
+            }
+            
+            .header-contacts {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: flex-end !important;
+                gap: 2px !important;
+            }
+
+            .header-contacts a { 
+                margin: 0 !important; 
+                display: block !important; 
+                font-size: 0.8rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            /* Главный баннер: экстремально плотный */
+            .hero {
+                padding: 24px 12px !important;
+                margin: 10px 0 !important;
+                border-radius: 16px !important;
+            }
+
+            .hero h1 { 
+                font-size: 1.6rem !important; 
+                margin-bottom: 8px !important;
+                line-height: 1.25 !important;
+            }
+
+            .hero p {
+                font-size: 0.85rem !important;
+                margin-bottom: 16px !important;
+                line-height: 1.45 !important;
+            }
+
+            /* Кнопки Hero: в один компактный ряд */
+            .hero-buttons {
+                display: flex !important;
+                gap: 8px !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+
+            .btn {
+                padding: 12px 14px !important;
+                font-size: 0.9rem !important;
+                border-radius: 12px !important;
+                flex: 1 !important;
+                text-align: center !important;
+            }
+
+            .btn-outline { 
+                margin-left: 0 !important; 
+                margin-top: 0 !important; 
+            }
+            
+            .services-title {
+                font-size: 1.4rem !important;
+                margin: 20px 0 10px !important;
+            }
+
+            /* Сетка услуг: превращается в плотный нативный список iOS/Android */
+            .services-grid {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+                margin-bottom: 25px !important;
+            }
+
+            .service-card {
+                padding: 14px 16px !important;
+                border-radius: 16px !important;
+                text-align: left !important;
+                display: flex !important;
+                flex-direction: row !important; /* Выстраиваем в ряд */
+                align-items: center !important;
+                justify-content: flex-start !important;
+                gap: 14px !important;
+            }
+
+            .service-card:hover {
+                transform: none !important; /* Убираем сдвиг вверх на мобильных во избежание дергания */
+            }
+
+            .service-icon {
+                font-size: 1.8rem !important;
+                margin-bottom: 0 !important;
+                flex-shrink: 0 !important;
+                width: 36px !important;
+                text-align: center !important;
+            }
+
+            .service-card-text {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 2px !important;
+            }
+
+            .service-card h3 {
+                font-size: 1.05rem !important;
+                margin-bottom: 0 !important;
+            }
+
+            .service-card p {
+                font-size: 0.8rem !important;
+                line-height: 1.35 !important;
+            }
+
+            /* Компактный подвал */
+            footer {
+                padding: 25px 12px !important;
+                margin-bottom: 12px !important;
+                border-radius: 16px !important;
+            }
+
+            footer h2 {
+                font-size: 1.3rem !important;
+            }
+
+            footer p {
+                font-size: 0.85rem !important;
+            }
+
+            .social-links {
+                gap: 12px !important;
+                margin: 15px 0 !important;
+            }
+
+            .social-item {
+                gap: 6px !important;
+            }
+
+            .social-btn {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.25rem !important;
+            }
+
+            .social-label {
+                font-size: 0.7rem !important;
+            }
+
+            footer a[href^="tel"] {
+                font-size: 1.45rem !important;
+            }
+            
+            /* Полноэкранное мобильное меню в светлых тонах */
+            .logo-dropdown-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                min-width: 100vw;
+                background: rgba(240, 248, 255, 0.98); /* Нежный светло-голубой оверлей */
+                backdrop-filter: blur(32px);
+                -webkit-backdrop-filter: blur(32px);
+                z-index: 99999;
+                padding: 100px 24px 40px 24px;
+                border: none;
+                border-radius: 0;
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                transform: translateY(-20px);
+                opacity: 0;
+                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                pointer-events: none;
+            }
+            
+            .logo-dropdown-menu.show {
+                display: flex !important;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .logo-dropdown-items-container {
+                width: 100%;
+                max-width: 360px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .logo-dropdown-item {
+                font-size: 1.1rem;
+                padding: 18px 24px;
+                border-radius: 18px;
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(0, 119, 255, 0.1);
+                color: #1e293b;
+                justify-content: flex-start;
+                transition: all 0.2s ease;
+            }
+
+            .logo-dropdown-item:hover {
+                background: rgba(0, 119, 255, 0.1);
+                transform: scale(1.02);
+                padding-left: 28px;
+            }
+
+            /* Кнопка закрытия полноэкранного меню */
+            .mobile-close-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                width: 54px;
+                height: 54px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(0, 119, 255, 0.15);
+                color: #1e293b;
+                font-size: 1.6rem;
+                cursor: pointer;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 100000;
+            }
+
+            .mobile-close-btn:hover {
+                background: #ffffff;
+                transform: rotate(90deg) scale(1.05);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="container">
+        <header class="glass">
+            <div class="logo">
+                <div class="logo-dropdown-container" id="logoDropdownContainer">
+                    <button class="logo-dropdown-trigger" id="logoDropdownTrigger" title="Разделы сайта" aria-label="Открыть меню разделов">
+                        <i class="fa-solid fa-water"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <!-- Выпадающее меню -->
+                    <div class="logo-dropdown-menu glass" id="logoDropdownMenu">
+                        <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Закрыть меню">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <div class="logo-dropdown-items-container" id="logoDropdownItemsContainer"></div>
+                    </div>
+                </div>
+                <span>DIVE HELP 78</span>
+            </div>
+            <div class="header-contacts">
+                <a href="tel:+79112633001"><i class="fa-solid fa-phone"></i> +7 (911) 263-30-01</a>
+                <a href="#contacts" id="headerContactsLink">Контакты</a>
+            </div>
+        </header>
+
+        <section class="hero glass">
+            <h1>Профессиональный поиск<br>под водой в СПб и ЛО</h1>
+            <p>Уронили телефон, ключи или квадрокоптер? Намотало трос на винт? Достанем ваши вещи со дна, осмотрим судно и решим любую подводную задачу. Экстренный выезд 24/7.</p>
+            <div class="hero-buttons">
+                <a href="tel:+79112633001" class="btn btn-primary">Вызвать</a>
+                <a href="#services" class="btn btn-outline" id="heroServicesBtn">Что ищем?</a>
+            </div>
+        </section>
+
+        <h2 class="services-title">Наши услуги</h2>
+
+        <section class="services-grid" id="services">
+            <a href="personal-search.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="service-card-text">
+                    <h3>Поиск личных вещей</h3>
+                    <p>Ищем телефоны, смарт-часы, ключи от машин, кольца и другие украшения даже в плотной иловой подушке.</p>
+                </div>
+            </a>
+            <a href="boat-help.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-anchor"></i></div>
+                <div class="service-card-text">
+                    <h3>Ремонт и обслуживание судов</h3>
+                    <p>Подъем утонувших лодочных моторов, якорей. Распутывание винтов от сетей и тросов, осмотр днища.</p>
+                </div>
+            </a>
+            <a href="instrument-work.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                <div class="service-card-text">
+                    <h3>Осмотр с видеосъемкой</h3>
+                    <p>Осмотр дна, днища судов или подводная съемка в хорошем качестве.</p>
+                </div>
+            </a>
+            <a href="water-cleaning.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="service-card-text">
+                    <h3>Очистка акваторий</h3>
+                    <p>Обследование и расчистка дна пирсов, частных пляжей и водозаборов от опасного мусора.</p>
+                </div>
+            </a>
+            <a href="pool-cleaning.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div class="service-card-text">
+                    <h3>Ремонт и обслуживание бассейнов</h3>
+                    <p>Обслуживаем и ремонтируем бассейны без спуска воды.</p>
+                </div>
+            </a>
+            <a href="welding.html" class="service-card glass">
+                <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="service-card-text">
+                    <h3>Сварочные работы и установка понтонов</h3>
+                    <p>Подводная сварка металлоконструкций, монтаж, ремонт и установка понтонов. Профессиональное оборудование, опытные водолазы и качественное выполнение работ.</p>
+                </div>
+            </a>
+        </section>
+
+        <footer class="glass" id="contacts">
+            <h2>Нужна срочная помощь?</h2>
+            <p style="margin-top: 6px; color: #475569;">Опишите, что и где утонуло — мы сориентируем по шансам и цене.</p>
+            
+            <div class="social-links">
+                <!-- ЗВОНОК СЛЕВА -->
+                <div class="social-item">
+                    <a href="tel:+79112633001" class="social-btn phone" title="Позвонить">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <span class="social-label">Звонок</span>
+                </div>
+
+                <!-- TELEGRAM -->
+                <div class="social-item">
+                    <a href="https://t.me/ProRepairman" class="social-btn tg" title="Telegram">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <span class="social-label">Telegram</span>
+                </div>
+
+                <!-- WHATSAPP -->
+                <div class="social-item">
+                    <a href="https://wa.me/qr/2NF34R5OAM47B1" class="social-btn wa" title="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <span class="social-label">WhatsApp</span>
+                </div>
+
+                <!-- МЕCCЕНДЖЕР МАКС СПРАВА -->
+                <div class="social-item">
+                    <a href="https://max.ru/u/f9LHodD0cOJIS66kGopVTmvgJo4LLvwAf3S8urF5gBmhGiVGxM2g5VNyJGg" class="social-btn max" title="Мессенджер МАКС">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.25 5.25V18.75C2.25 19.5784 2.92157 20.25 3.75 20.25H20.25C21.0784 20.25 21.75 19.5784 21.75 18.75V5.25C21.75 4.42157 21.0784 3.75 20.25 3.75H3.75C2.92157 3.75 2.25 4.42157 2.25 5.25Z" fill="white" fill-opacity="0.15"/>
+                            <path d="M4.5 17.5V6.5H7.5L12 11.5L16.5 6.5H19.5V17.5H16.5V11L12 16L7.5 11V17.5H4.5Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <span class="social-label">МАКС</span>
+                </div>
+            </div>
+
+            <a href="tel:+79112633001" style="font-size: 2rem; color: #0f172a; text-decoration: none; font-weight: 800;">
+                +7 (911) 263-30-01
+            </a>
+            <p style="margin-top: 10px; font-size: 0.85rem; color: #475569;">Работаем по Санкт-Петербургу и всей Ленинградской области</p>
+            <div style="margin-top: 20px; font-size: 0.8rem;">
+                <a href="privacy.html" style="color: rgb(141, 141, 141); text-decoration: underline; margin-right: 15px;">Политика конфиденциальности</a>
+                <a href="offer.html" style="color: rgb(141, 141, 141); text-decoration: underline;">Публичная оферта</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Настройка страниц меню
+            const sitePages = [
+                { name: 'Главная страница', url: 'index.html', active: true, icon: 'fa-house' },
+                { name: 'Поиск личных вещей', url: 'personal-search.html', icon: 'fa-mobile-screen-button' },
+                { name: 'Помощь катерам и яхтам', url: 'boat-help.html', icon: 'fa-anchor' },
+                { name: 'Работа с приборами', url: 'instrument-work.html', icon: 'fa-magnifying-glass-location' },
+                { name: 'Очистка акваторий', url: 'water-cleaning.html', icon: 'fa-leaf' },
+                { name: 'Ремонт и обслуживание бассейнов', url: 'pool-cleaning.html', icon: 'fa-screwdriver-wrench'},
+                { name: 'Сварочные работы и установка понтонов', url: 'pool-cleaning.html', icon: 'fa-bolt'}
+            ];
+
+            const trigger = document.getElementById('logoDropdownTrigger');
+            const menu = document.getElementById('logoDropdownMenu');
+            const container = document.getElementById('logoDropdownContainer');
+            const itemsContainer = document.getElementById('logoDropdownItemsContainer');
+            const closeBtn = document.getElementById('mobileCloseBtn');
+
+            // Генерация структуры списка страниц в меню
+            if (menu && trigger && container && itemsContainer) {
+                itemsContainer.innerHTML = ''; 
+
+                sitePages.forEach(page => {
+                    const item = document.createElement('a');
+                    item.href = page.url;
+                    item.className = 'logo-dropdown-item';
+                    if (page.active) {
+                        item.classList.add('active');
+                    }
+
+                    const iconClass = page.icon || 'fa-arrow-right';
+                    item.innerHTML = `<i class="fa-solid ${iconClass}"></i><span>${page.name}</span>`;
+                    
+                    itemsContainer.appendChild(item);
+                });
+
+                // Плавное открытие выпадающего меню
+                function openDropdown() {
+                    menu.style.display = window.innerWidth <= 768 ? 'flex' : 'block';
+                    if (window.innerWidth <= 768) {
+                        document.body.style.overflow = 'hidden'; // Блокировка скролла на мобильных
+                    }
+                    setTimeout(() => {
+                        menu.classList.add('show');
+                        container.classList.add('active');
+                    }, 20);
+                }
+
+                // Плавное закрытие выпадающего меню
+                function closeDropdown() {
+                    menu.classList.remove('show');
+                    container.classList.remove('active');
+                    document.body.style.overflow = ''; // Разблокировка скролла
+                    setTimeout(() => {
+                        if (!menu.classList.contains('show')) {
+                            menu.style.display = 'none';
+                        }
+                    }, 250);
+                }
+
+                // Клик на значок
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = menu.classList.contains('show');
+                    if (isOpen) {
+                        closeDropdown();
+                    } else {
+                        openDropdown();
+                    }
+                });
+
+                // Обработчик мобильного крестика
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        closeDropdown();
+                    });
+                }
+
+                // Закрытие при клике вне меню
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth > 768 && !container.contains(e.target)) {
+                        closeDropdown();
+                    }
+                });
+
+                // Закрытие по клавише Escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closeDropdown();
+                    }
+                });
+            }
+
+            // Инерционный плавный скролл
+            function smoothScrollTo(targetSelector, duration) {
+                const target = document.querySelector(targetSelector);
+                if (!target) return;
+
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
+
+                function ease(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t * t * t * t + b;
+                    t -= 2;
+                    return c / 2 * (t * t * t * t * t + 2) + b;
+                }
+
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const run = ease(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+
+                requestAnimationFrame(animation);
+            }
+
+            // Скролл к разделу контактов
+            const contactsLink = document.getElementById('headerContactsLink');
+            if (contactsLink) {
+                contactsLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (menu && menu.classList.contains('show')) {
+                        closeDropdown();
+                    }
+                    smoothScrollTo('#contacts', 1200);
+                });
+            }
+
+            // Скролл к секции "Что мы ищем?"
+            const servicesBtn = document.getElementById('heroServicesBtn');
+            if (servicesBtn) {
+                servicesBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    smoothScrollTo('#services', 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
