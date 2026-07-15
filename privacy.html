@@ -6,108 +6,12 @@
     <title>Политика конфиденциальности</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="Alogo.png" type="image/x-icon">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            color: #1e293b;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 24px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #0077ff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-        .back-link:hover {
-            color: #0056b3;
-            transform: translateX(-4px);
-        }
-        h1 {
-            font-size: 2rem;
-            color: #0f172a;
-            margin-bottom: 10px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        .subtitle {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            padding-bottom: 15px;
-        }
-        h2 {
-            font-size: 1.25rem;
-            color: #0f172a;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        p {
-            margin-bottom: 15px;
-            color: #334155;
-            font-size: 1rem;
-        }
-        ul {
-            margin-bottom: 15px;
-            padding-left: 20px;
-            color: #334155;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        @media (max-width: 640px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                padding: 24px 16px;
-                border-radius: 16px;
-            }
-            h1 {
-                font-size: 1.6rem;
-            }
-            h2 {
-                font-size: 1.15rem;
-                margin-top: 20px;
-            }
-            p, li {
-                font-size: 0.95rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/privacy.css">
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> На главную
+        <a href="javascript:history.back();" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Вернуться обратно
         </a>
         
         <h1>Политика конфиденциальности</h1>
