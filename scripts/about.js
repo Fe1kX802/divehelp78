@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Осмотр с видеосъемкой', url: 'instrument-work.html', icon: 'fa-magnifying-glass-location' },
         { name: 'Очистка акваторий', url: 'water-cleaning.html', icon: 'fa-leaf' },
         { name: 'Ремонт и обслуживание бассейнов', url: 'pool-cleaning.html', icon: 'fa-screwdriver-wrench'},
-        { name: 'Сварочные работы и установка понтонов', url: 'welding.html', icon: 'fa-bolt'}
+        { name: 'Сварочные работы и наведение понтонов', url: 'welding.html', icon: 'fa-bolt'}
     ];
 
     const trigger = document.getElementById('logoDropdownTrigger');
